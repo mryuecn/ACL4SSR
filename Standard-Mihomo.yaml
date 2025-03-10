@@ -139,6 +139,7 @@ proxy-groups:
 rules:
   - RULE-SET,private_domain,全球直连
   - RULE-SET,geolocation-!cn,🚀 节点选择
+  - RULE-SET,tmdb,🚀 节点选择
   - RULE-SET,proxymedia,🚀 节点选择
   - RULE-SET,proxy,🚀 节点选择
   - RULE-SET,proxylite,🚀 节点选择
@@ -170,6 +171,7 @@ rule-anchor:
 rule-providers: 
   private_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"}
   geolocation-!cn: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"}
+  tmdb: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tmdb.mrs"}
   proxy: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/proxy.mrs"}
   proxymedia: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/proxymedia.mrs"}
   proxylite: {!!merge <<: *class, url: "https://raw.githubusercontent.com/qichiyuhub/rule/refs/heads/master/ProxyLite.list"}
