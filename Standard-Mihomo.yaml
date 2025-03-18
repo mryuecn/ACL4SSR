@@ -92,15 +92,15 @@ dns:
     - "+.cn.ntp.org.cn"
     - "+.ayaa.cc"
   default-nameserver:
-    - 202.106.195.68
-    - 202.106.46.151
+    - 223.5.5.5
+    - 114.114.114.114
   proxy-server-nameserver:
    - https://dns.cloudflare.com/dns-query
    - https://dns.google/dns-query
   nameserver:
    - https://dns.alidns.com/dns-query
    - https://doh.pub/dns-query
- 
+
    
 proxies:
 - name: "全球直连"
@@ -122,7 +122,6 @@ proxy-groups:
   - {name: 📲 Telegram,!!merge <<: *pr}
   - {name: 🎥 NETFLIX, type: select, proxies: [🇭🇰 香港自动, 🇹🇼 台湾自动, 🇰🇷 韩国自动, 🇯🇵 日本自动, 🇸🇬 狮城自动, 🇺🇸 美国自动]}
   - {name: ✈️ Speedtest, type: select, proxies: [全球直连, 🚀 节点选择]}
-#  - {name: 💶 PayPal,!!merge <<: *pr}
   - {name: 🍎 Apple, type: select, proxies: [全球直连, 🚀 节点选择]}
   - {name: 🎯 全球直连, type: select, proxies: [全球直连]}
   - {name: 🐟 漏网之鱼, type: select, proxies: [🚀 节点选择, 全球直连]}
@@ -138,8 +137,6 @@ proxy-groups:
   - {name: 🌐 全部节点, type: select, include-all: true, filter: "^((?!(全球直连)).)*$"}
 rules:
   - RULE-SET,private_domain,全球直连
-  - RULE-SET,geolocation-!cn,🚀 节点选择
-  - RULE-SET,tmdb,🚀 节点选择
   - RULE-SET,proxymedia,🚀 节点选择
   - RULE-SET,proxy,🚀 节点选择
   - RULE-SET,proxylite,🚀 节点选择
@@ -155,7 +152,6 @@ rules:
   - RULE-SET,speedtest_domain,✈️ Speedtest
   - RULE-SET,telegram_domain,📲 Telegram
   - RULE-SET,netflix_domain,🎥 NETFLIX
-#  - RULE-SET,paypal_domain,💶 PayPal
   - RULE-SET,gfw_domain,🚀 节点选择
   - RULE-SET,geolocation-!cn,🚀 节点选择
   - RULE-SET,cn_domain,🎯 全球直连
@@ -163,6 +159,11 @@ rules:
   - RULE-SET,netflix_ip,🎥 NETFLIX,no-resolve
   - RULE-SET,telegram_ip,📲 Telegram,no-resolve
   - RULE-SET,cn_ip,🎯 全球直连,no-resolve
+  
+  - SRC-IP-CIDR,10.10.1.31/32,DIRECT
+  - SRC-IP-CIDR,10.10.1.33/32,DIRECT
+  - SRC-IP-CIDR,10.10.1.36/32,DIRECT
+  
   - MATCH,🐟 漏网之鱼
 rule-anchor:
   ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
@@ -171,7 +172,6 @@ rule-anchor:
 rule-providers: 
   private_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"}
   geolocation-!cn: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"}
-  tmdb: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tmdb.mrs"}
   proxy: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/proxy.mrs"}
   proxymedia: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/proxymedia.mrs"}
   proxylite: {!!merge <<: *class, url: "https://raw.githubusercontent.com/qichiyuhub/rule/refs/heads/master/ProxyLite.list"}
@@ -181,7 +181,6 @@ rule-providers:
   github_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"}
   telegram_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"}
   netflix_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs"}
-#  paypal_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/paypal.mrs"}
   onedrive_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.mrs"}
   microsoft_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"}
   apple_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple-cn.mrs"}
